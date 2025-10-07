@@ -1,0 +1,14 @@
+.white{
+    color: blue;
+    font-size: 30px;
+}
+
+.card-img-top {
+    object-fit: cover;
+    width: 100%;
+    height: 320px;       /* Ideal for book covers */
+}
+.container {
+    max-width: 1050px;   /* Neat overall card grid */
+    margin: 0 auto;
+}
