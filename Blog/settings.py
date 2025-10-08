@@ -1,12 +1,9 @@
-
-
 from pathlib import Path
 import dj_database_url
 import os
-
+from django.contrib.auth import get_user_model
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-for-local")
@@ -76,10 +73,14 @@ DATABASES = {
     }
 }
 
-database_url=os.environ.get("DATABASE_URL")
-DATABASES["default"]=dj_database_url.parse(database_url)
-
-
+# If a DATABASE_URL env var exists, override default with Postgres config
+database_url = os.environ.get("DATABASE_URL")
+if database_url:
+    DATABASES["default"] = dj_database_url.parse(
+        database_url,
+        conn_max_age=600,   # keep DB connections open for performance
+        ssl_require=True    # enforce SSL; set False only if you know it's ok
+    )
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -125,3 +126,19 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media') 
+
+from django.contrib.auth import get_user_model
+import os
+
+if os.environ.get("CREATE_SUPERUSER") == "True":
+    try:
+        User = get_user_model()
+        if not User.objects.filter(username="admin").exists():
+            User.objects.create_superuser(
+                username="admin",
+                email="admin@example.com",
+                password="Admin@123"
+            )
+            print("✅ Superuser 'admin' created successfully.")
+    except Exception as e:
+        print(f"⚠️ Superuser creation skipped: {e}")
