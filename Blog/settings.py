@@ -109,6 +109,14 @@ USE_I18N = True
 USE_TZ = True
 
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
+
+
+
 
 
 
@@ -127,18 +135,4 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media') 
 
-from django.contrib.auth import get_user_model
-import os
-
-if os.environ.get("CREATE_SUPERUSER") == "True":
-    try:
-        User = get_user_model()
-        if not User.objects.filter(username="admin").exists():
-            User.objects.create_superuser(
-                username="admin",
-                email="admin@example.com",
-                password="Admin@123"
-            )
-            print("✅ Superuser 'admin' created successfully.")
-    except Exception as e:
-        print(f"⚠️ Superuser creation skipped: {e}")
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
