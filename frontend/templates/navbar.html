@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,49 +11,49 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/user.css' %}">
     <style>
-        /* Custom navbar styling */
+        /* Custom golden navbar styling */
         .navbar-custom {
-            background: #b2d8b2; /* Silk green shade */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: #D4AF37 !important;
+            /* Gold Leaf */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
             border-radius: 12px;
             padding: 0.5rem 1rem;
         }
 
-        .navbar-custom .navbar-brand {
-            font-weight: bold;
-            font-size: 1.8rem;
-            color: #fff;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-        }
-
+        .navbar-custom .navbar-brand,
         .navbar-custom .nav-link {
-            color: #fff;
-            font-weight: 500;
-            margin-right: 0.5rem;
-            transition: all 0.3s ease;
+            color: #162040 !important;
+            /* Deep Navy for contrast */
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.25);
+            transition: all 0.3s;
         }
 
-        .navbar-custom .nav-link:hover {
-            color: #2a2a2a;
-            background: rgba(255,255,255,0.2);
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            background: rgba(22, 32, 64, 0.09);
+            color: #101524 !important;
+            /* Even darker navy on hover */
             border-radius: 8px;
             padding: 0.3rem 0.7rem;
         }
 
         .navbar-toggler {
-            border-color: rgba(255,255,255,0.7);
+            border-color: #162040 !important;
         }
 
         .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%2822, 32, 64, 0.9%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Book Oasis</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -75,4 +76,5 @@
 
     <script src="{% static 'js/test.js' %}"></script>
 </body>
+
 </html>
