@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Book Blog Registration</title>
@@ -8,35 +9,42 @@
         body {
             background: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 100%);
         }
+
         .register-card {
             border-radius: 1rem;
             box-shadow: 0 8px 24px 0 rgba(39, 79, 117, 0.11);
         }
+
         .register-img {
             background: url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=700&q=80') center center/cover;
             border-radius: 1rem 0 0 1rem;
             min-height: 480px;
         }
+
         .gradient-custom {
             background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
             border-radius: 0 1rem 1rem 0;
         }
+
         .form-label {
             font-weight: 500;
         }
+
         .form-control:focus {
             box-shadow: 0 0 3px #a1c4fd;
             border-color: #277fb3;
         }
+
         .register-footer {
             font-size: 0.92rem;
             color: #7c8c9f;
         }
     </style>
-    {% load bootstrap5 %}    
-    {% bootstrap_css %}   
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
     {% bootstrap_javascript %}
 </head>
+
 <body>
     <div class="container py-5">
         <div class="row justify-content-center align-items-center vh-100">
@@ -50,24 +58,33 @@
                                     <h4 class="mb-0">Create Your Account</h4>
                                     <p class="text-muted mt-2 mb-4">Join our book lovers' community!</p>
                                 </div>
+                                <div class="text-start mb-3">
+                                    <a href="/post/book/" class="btn btn-secondary">
+                                        &larr; Back
+                                    </a>
+                                </div>
                                 <form action="" method="POST">
                                     {% csrf_token %}
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="username" class="form-label">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username" required>
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                required>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="firstname" class="form-label">First Name</label>
-                                            <input type="text" class="form-control" id="firstname" name="first_name" required>
+                                            <input type="text" class="form-control" id="firstname" name="first_name"
+                                                required>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="lastname" class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" id="lastname" name="last_name" required>
+                                            <input type="text" class="form-control" id="lastname" name="last_name"
+                                                required>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="age" class="form-label">Age</label>
-                                            <input type="number" class="form-control" id="age" name="age" min="12" max="120" required>
+                                            <input type="number" class="form-control" id="age" name="age" min="12"
+                                                max="120" required>
                                         </div>
                                         <div class="col-12">
                                             <label for="email" class="form-label">Email</label>
@@ -75,7 +92,8 @@
                                         </div>
                                         <div class="col-12">
                                             <label for="password" class="form-label">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" required>
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="d-grid mt-4">
@@ -96,4 +114,5 @@
         </div>
     </div>
 </body>
+
 </html>

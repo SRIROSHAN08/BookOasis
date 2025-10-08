@@ -40,18 +40,22 @@
         /* semi-transparent for warmth */
         -webkit-backdrop-filter: blur(2px);
         backdrop-filter: blur(2px);
-        height: 350px; /* Reduced height */
+        height: 350px;
+        /* Reduced height */
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
 
     .card img {
+        width: 100%;
+        aspect-ratio: 2/3;
+        /* adjust to book cover dimensions */
+        object-fit: cover;
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
-        height: 140px; /* Reduced image height */
-        object-fit: cover;
     }
+
 
     .card-body {
         padding: 1rem;
@@ -68,14 +72,16 @@
     .card-title {
         font-weight: 700;
         letter-spacing: 0.8px;
-        color: #015e82; /* strong teal blue */
+        color: #015e82;
+        /* strong teal blue */
         text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.10);
         font-size: 1.28rem;
     }
 
     .card-subtitle {
         font-style: italic;
-        color: #37474f; /* muted gray-blue for contrast */
+        color: #37474f;
+        /* muted gray-blue for contrast */
         text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.09);
         font-size: 1rem;
     }
@@ -88,7 +94,8 @@
     }
 
     .list-unstyled li {
-        color: #263238; /* dark charcoal for info */
+        color: #263238;
+        /* dark charcoal for info */
     }
 
     .btn-animated {
@@ -125,7 +132,7 @@
                 <img src="{{ book.book_picture.url }}" alt="Cover of {{ book.book_name }}" class="card-img-top">
                 {% else %}
                 <div class="bg-light d-flex align-items-center justify-content-center"
-                     style="height: 140px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                    style="height: 140px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
                     <span class="text-muted fst-italic">No picture available</span>
                 </div>
                 {% endif %}

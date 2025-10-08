@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Book Blog Login</title>
@@ -8,32 +9,38 @@
         body {
             background: linear-gradient(135deg, #f8fafc 0%, #dce7f9 100%);
         }
+
         .card-login {
             border-radius: 1rem;
             box-shadow: 0 8px 24px 0 rgba(39, 79, 117, 0.11);
         }
+
         .login-img {
             background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=700&q=80') center center/cover;
             border-radius: 1rem 0 0 1rem;
             min-height: 400px;
         }
+
         .gradient-custom {
             background: linear-gradient(120deg, #f7971e 0%, #ffd200 100%);
             border-radius: 0 1rem 1rem 0;
         }
+
         .form-control:focus {
             box-shadow: 0 0 3px #fccb90;
             border-color: #b44593;
         }
+
         .login-footer {
             font-size: 0.95rem;
             color: #7c8c9f;
         }
     </style>
-    {% load bootstrap5 %}    
-    {% bootstrap_css %}   
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
     {% bootstrap_javascript %}
 </head>
+
 <body>
     <div class="container py-5">
         <div class="row justify-content-center align-items-center vh-100">
@@ -44,21 +51,29 @@
                         <div class="col-md-6 gradient-custom d-flex align-items-center">
                             <div class="card-body p-4 p-md-5 w-100">
                                 <div class="text-center mb-4">
+                                    <div class="text-start mb-3">
+                                        <a href="/post/book/" class="btn btn-secondary">
+                                            &larr; Back
+                                        </a>
+                                    </div>
                                     <i class="fas fa-book-open fa-2x text-primary mb-3"></i>
                                     <h4 class="">Book Oasis Login</h4>
-                                    <p class="text-muted small">Enter your credentials to get lost in the world of books!</p>
+                                    <p class="text-muted small">Enter your credentials to get lost in the world of
+                                        books!</p>
                                 </div>
-                                <form action="" method="POST" >
+                                <form action="" method="POST">
 
-                                {% csrf_token %}
+                                    {% csrf_token %}
 
                                     <div class="mb-3">
                                         <label for="username" class="form-label">User name</label>
-                                        <input type="text" class="form-control" name="username" placeholder="User name" required>
+                                        <input type="text" class="form-control" name="username" placeholder="User name"
+                                            required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" name="password" placeholder="Password" required >
+                                        <input type="password" class="form-control" name="password"
+                                            placeholder="Password" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100">Login</button>
                                     <p class="text-danger fw-bold">{{error}}</p>
@@ -67,7 +82,7 @@
                                     </div>
                                 </form>
                                 <div class="login-footer text-center mt-4">
-                                    &copy; 2025 Book Oasis. For book lovers,  by book lovers.
+                                    &copy; 2025 Book Oasis. For book lovers, by book lovers.
                                 </div>
                             </div>
                         </div>
@@ -77,4 +92,5 @@
         </div>
     </div>
 </body>
+
 </html>
