@@ -2,93 +2,148 @@
 {% load static %}
 {% block content %}
 <style>
-body {
-  background: url("{% static 'assets/images/Wallpaper 7.jpg' %}") no-repeat center center fixed;
-  background-size: cover;
-  font-family: 'Merriweather', serif;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  color: #704212;
-}
+  body {
+    background-color: #1B457D !important;
+    background-image: none !important;
+    font-family: 'Merriweather', serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: #e8eafc;
+    /* Soft white-blue for best visibility */
+    transition: background-color 0.5s ease;
+  }
 
-.detail-container {
-  background: rgba(255, 251, 239, 0.97);
-  max-width: 610px;
-  margin: 3rem auto;
-  padding: 2.7rem 2.2rem 2.2rem 2.2rem;
-  border-radius: 27px;
-  box-shadow: 0 7px 36px rgba(134,88,23,0.18), 0 2px 10px rgba(220,168,94,0.09);
-  border: 3px solid #deb887;
-}
+  .detail-container {
+    background: #23242a !important;
+    max-width: 710px;
+    margin: 3.2rem auto;
+    padding: 2.8rem 2.2rem 2.3rem 2.2rem;
+    border-radius: 27px;
+    box-shadow: 0 7px 38px rgba(65, 183, 191, 0.14), 0 2px 10px rgba(76, 255, 190, 0.09);
+    border: none;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.9s forwards;
+    color: #e8eafc;
+    /* Very visible font */
+  }
 
-.profile-pic {
-  display: block;
-  width: 172px;
-  height: 172px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 4px solid #c27a14;
-  margin: 0 auto 1.2rem;
-  box-shadow: 0 6px 18px #ba8b505c;
-  background: #ffe8c0;
-}
+  .profile-pic {
+    display: block;
+    width: 172px;
+    height: 172px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #22c55e;
+    /* Light green accent */
+    margin: 0 auto 1.2rem;
+    box-shadow: 0 6px 18px #29c47d5c;
+    background: #e8f5e9;
+  }
 
-.contributor-name {
-  text-align: center;
-  font-size: 2.3rem;
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  margin-bottom: 0.12rem;
-  color: #a36824;
-  text-shadow: 0 4px 22px #fff2, 0 1px 3px #754c1fa1;
-  letter-spacing: 0.04em;
-}
+  .contributor-name {
+    text-align: center;
+    font-size: 2.6rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    margin-bottom: 0.12rem;
+    color: #58efb7;
+    text-shadow: 0 4px 18px #23242aad, 0 1px 3px #22c55e88;
+    letter-spacing: 0.04em;
+  }
 
-.section-header {
-  font-weight: 700;
-  font-family: 'Playfair Display', serif;
-  letter-spacing: 0.06em;
-  margin-top: 1.8rem;
-  margin-bottom: 0.4rem;
-  border-bottom: 2.7px solid #c27a14;
-  padding-bottom: 0.2rem;
-  color: #c27a14;
-  font-size: 1.21rem;
-}
+  .section-header {
+    font-weight: 700;
+    font-size: 1.25rem;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.075em;
+    margin-top: 2.2rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 2.7px solid #22c55e;
+    padding-bottom: 0.2rem;
+    color: #22c55e;
+  }
 
-.about-text, .contribution-text {
-  font-size: 1.03rem;
-  line-height: 1.66;
-  color: #654321;
-  text-align: justify;
-  background: rgba(255, 244, 217, 0.69);
-  border-radius: 7px;
-  padding: 0.7rem 1rem 0.7rem 1rem;
-  box-shadow: 0 1px 7px #f3d19e44;
-}
+  .about-text,
+  .contribution-text {
+    font-size: 1.07rem;
+    line-height: 1.68;
+    color: #e8eafc;
+    text-align: justify;
+    background: rgba(76, 255, 190, 0.08);
+    border-radius: 7px;
+    padding: 0.75rem 1.1rem 0.75rem 1.1rem;
+    box-shadow: 0 1px 9px #29c47d36;
+  }
 
-ul.book-list {
-  list-style-type: disc;
-  list-style-position: inside;
-  padding-left: 0;
-  color: #a5621a;
-  font-size: 1.02rem;
-}
+  ul.book-list {
+    list-style-type: disc;
+    list-style-position: inside;
+    padding-left: 0;
+    color: #58efb7;
+    font-size: 1.08rem;
+    font-family: 'Merriweather', serif;
+  }
 
-ul.book-list li {
-  margin-bottom: 0.45rem;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 5px;
-  padding: 3px 10px;
-  font-weight: 500;
-  color: #845227;
-}
+  ul.book-list li {
+    margin-bottom: 0.52rem;
+    background: rgba(34, 197, 94, 0.11);
+    border-radius: 5px;
+    padding: 3px 11px;
+    font-weight: 600;
+    color: #e8eafc;
+  }
 
-@media (max-width:720px) {
-  .detail-container { padding: 1.5rem 0.2rem; }
-  .profile-pic { width: 90px; height: 90px;}
-}
+  .btn-back {
+    display: block;
+    width: 100%;
+    max-width: 225px;
+    margin: 2.2rem auto 0 auto;
+    padding: 0.7rem 0;
+    background: #22c55e;
+    color: #23242a;
+    font-weight: 700;
+    font-size: 1.16rem;
+    font-family: 'Merriweather', serif;
+    border: none;
+    border-radius: 23px;
+    box-shadow: 0 5px 20px rgba(34, 197, 94, 0.19);
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.16s, color 0.16s, transform 0.17s;
+  }
+
+  .btn-back:hover,
+  .btn-back:focus {
+    background: #198f49;
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  @media (max-width:760px) {
+    .detail-container {
+      padding: 1.2rem 0.2rem;
+    }
+
+    .profile-pic {
+      width: 88px;
+      height: 88px;
+    }
+
+    .btn-back {
+      font-size: 1.04rem;
+      padding: 0.5rem 0;
+    }
+  }
+
+  /* Animation */
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>
 
 <div class="detail-container">
@@ -111,13 +166,22 @@ ul.book-list li {
     <h4 class="section-header">Books Completed</h4>
     <ul class="book-list">
       {% for book in contributor.contributed_books.splitlines %}
-        {% if book %}
-          <li>{{ book }}</li>
-        {% endif %}
+      {% if book %}
+      <li>{{ book }}</li>
+      {% endif %}
       {% empty %}
-          <li>No books completed yet.</li>
+      <li>No books completed yet.</li>
       {% endfor %}
     </ul>
   </div>
+
+  <!-- Customizable back button; update href destination -->
+  <a href="/booker/all/" class="btn-back"><i class="bi bi-arrow-left"></i> Back</a>
 </div>
+
+<script>
+  window.addEventListener('load', () => {
+    document.querySelector('.detail-container').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
 {% endblock %}

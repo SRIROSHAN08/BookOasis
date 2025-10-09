@@ -13,4 +13,5 @@ class BookDetails_Form(forms.ModelForm):
             'detailed_summary':forms.Textarea(attrs={'class':'form-control','rows':3}),
             'book_picture':forms.FileInput(attrs={'class':'form-control'}),
             'contributor':forms.TextInput(attrs={'class':'form-control'}),
+            'front_page_picture':forms.FileInput(attrs={'class':'form-control'})
         }

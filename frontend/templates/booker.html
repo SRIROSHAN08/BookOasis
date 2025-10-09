@@ -3,137 +3,282 @@
 {% block content %}
 
 <style>
-body {
-  background: url("{% static 'assets/images/Wallpaper 7.jpg' %}") no-repeat center center fixed;
-  background-size: cover;
-  font-family: 'Merriweather', serif;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
+  /* --- Page base --- */
+  body {
+    background: #1B457D !important;
+    font-family: 'Merriweather', serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-.bg-overlay {
-  background: rgba(255, 252, 241, 0.95);
-  border-radius: 16px;
-  border: 4px solid #deb887; /* warm wood color */
-  padding: 2.5rem 2.3rem 2rem 2.3rem;
-  margin-top: 3.5rem;
-  box-shadow: 0 6px 40px 0 rgba(150, 94, 24, 0.15), 0 1.5px 8px 0 rgba(220, 168, 94, 0.07);
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
-}
+  .bg-overlay {
+    background: transparent;
+    box-shadow: none;
+    max-width: 1100px;
+    margin: 3.5rem auto 3.5rem auto;
+    padding: 0 1rem;
+  }
 
-h1 {
-  font-family: 'Playfair Display', serif;
-  color: #c27a14;
-  text-shadow: 0 4px 22px #fff3, 0 1px 3px #b07414ad;
-  font-size: 2.5rem;
-}
+  /* Headings */
+  h1 {
+    font-family: 'Playfair Display', serif;
+    color: #FFDB70;
+    text-shadow: 0 2px 10px #10111488, 0 1px 2px #1B457D88;
+    font-size: 2.35rem;
+    font-weight: 800;
+    margin-bottom: 0.35rem;
+    text-align: center;
+  }
 
-.text-muted {
-  color: #a36c0b !important;
-  font-size: 1.1rem;
-}
+  .text-muted {
+    color: #ffc778 !important;
+    font-size: 1.05rem;
+    font-weight: 500;
+    text-align: center;
+  }
 
-ul.list-group {
-  background: transparent;
-  border: none;
-  padding: 0;
-}
+  /* Grid container for contributors (uses card style) */
+  .contributors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.4rem;
+    align-items: stretch;
+  }
 
-.list-group-item {
-  background: rgba(255, 243, 218, 0.97);
-  border: none;
-  border-radius: 15px;
-  margin-bottom: 1.15rem;
-  box-shadow: 0 2px 12px rgba(210,130,56,0.09);
-  display: flex;
-  align-items: center;
-  transition: box-shadow 0.19s, transform 0.19s;
-}
+  /* Contributor card (li-like) */
+  .contributor-card {
+    --card-radius: 14px;
+    background: #23242a;
+    border-radius: var(--card-radius);
+    padding: 0.95rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    box-shadow: 0 4px 18px rgba(26, 31, 56, 0.12);
+    transition: transform 260ms cubic-bezier(.2, .9, .2, 1), box-shadow 260ms cubic-bezier(.2, .9, .2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 219, 112, 0.03);
+  }
 
-.list-group-item:hover {
-  box-shadow: 0 7px 34px rgba(210,130,56,0.18);
-  transform: translateY(-4px) scale(1.01);
-}
+  /* Pop + glow on hover/focus */
+  .contributor-card:hover,
+  .contributor-card:focus-within {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(255, 219, 112, 0.12), 0 6px 16px rgba(16, 17, 20, 0.26);
+    z-index: 2;
+  }
 
-.contributor-pic {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 50%;
-  background: #fed8b1;
-  border: 2.2px solid #b98432;
-  margin-right: 1.3rem;
-  box-shadow: 0 2px 7px #bd803a42;
-  transition: transform .15s;
-}
-.list-group-item:hover .contributor-pic {
-  transform: rotate(-4deg) scale(1.05);
-}
+  .contributor-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--card-radius);
+    box-shadow: 0 0 0 0 rgba(255, 219, 112, 0.06);
+    transition: box-shadow .28s ease;
+    pointer-events: none;
+  }
 
-strong {
-  color: #a36c0b;
-  font-size: 1.15rem;
-  letter-spacing: 0.2px;
-}
+  .contributor-card:hover::after,
+  .contributor-card:focus-within::after {
+    box-shadow: 0 0 40px 3px rgba(255, 219, 112, 0.06);
+  }
 
-.small {
-  font-size: 1rem;
-  color: #6a3712;
-}
+  /* Avatar */
+  .contributor-pic {
+    width: 76px;
+    height: 76px;
+    object-fit: cover;
+    border-radius: 50%;
+    background: #232323;
+    border: 2px solid #FFDB70;
+    box-shadow: 0 6px 18px rgba(255, 219, 112, 0.08);
+    flex-shrink: 0;
+    transition: transform .22s cubic-bezier(.2, .9, .2, 1);
+  }
 
-.btn-primary {
-  background: #deb887;
-  color: #58350d;
-  border: none;
-  border-radius: 22px;
-  margin-left: auto;
-  box-shadow: 0 2px 12px #d1aa7a59;
-  font-weight: 600;
-  font-family: 'Merriweather', serif;
-  padding: 0.28rem 1.24rem;
-  margin-top: 8px;
-  transition: background 0.18s, color 0.18s, transform 0.19s;
-}
+  .contributor-card:hover .contributor-pic,
+  .contributor-card:focus-within .contributor-pic {
+    transform: rotate(-6deg) scale(1.06);
+  }
 
-.btn-primary:hover, .btn-primary:focus {
-  background: #c57b19;
-  color: #fff8ea;
-  transform: scale(1.05);
-}
+  /* Info */
+  .contributor-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.18rem;
+    min-width: 0;
+  }
 
-@media (max-width:700px) {
-  .bg-overlay {padding: 1.2rem 0.2rem;}
-  .list-group-item {flex-direction: column; align-items: flex-start;}
-  .btn-primary {width: 100%; margin: 0.7rem 0 0 0;}
-}
+  .contributor-name {
+    color: #FFDB70;
+    font-size: 1.12rem;
+    font-weight: 700;
+    letter-spacing: 0.25px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .contributor-role {
+    color: #d6d6d6;
+    font-size: 0.98rem;
+    font-weight: 500;
+  }
+
+  /* CTA button (keeps your style) */
+  .btn-primary {
+    background: #FFDB70;
+    color: #101114;
+    border: none;
+    border-radius: 20px;
+    padding: 0.36rem 1.02rem;
+    font-weight: 700;
+    font-family: 'Merriweather', serif;
+    transition: transform .18s ease, background .18s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .btn-primary:focus,
+  .btn-primary:hover {
+    background: #ffd44d;
+    transform: translateY(-3px);
+    color: #101114;
+  }
+
+  /* Right-aligned area for CTA on large screens */
+  .card-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Make sure layout collapses nicely on small screens */
+  @media (max-width: 700px) {
+    .bg-overlay {
+      padding: 1.2rem 0.6rem;
+      max-width: 640px;
+    }
+
+    .contributors-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .contributor-card {
+      flex-direction: row;
+      align-items: center;
+      padding: 0.85rem;
+    }
+
+    .card-right {
+      margin-left: 0;
+    }
+  }
+
+  /* Accessibility: visible focus ring for keyboard users */
+  .contributor-card:focus-visible {
+    outline: 3px solid rgba(255, 219, 112, 0.14);
+    outline-offset: 6px;
+    border-radius: var(--card-radius);
+  }
 </style>
 
 <div class="container bg-overlay">
-  <h1 class="text-center mb-4">
-    Meet Our Book Oasis Contributors
-  </h1>
-  <p class="text-center text-muted mb-5">
-    Friendly readers and passionate wordsmiths who make our virtual library a joy to visit!
-  </p>
+  <h1>Meet Our Book Oasis Contributors</h1>
+  <p class="text-muted mb-4">Friendly readers and passionate wordsmiths who make our virtual library a joy to visit!</p>
 
-  <ul class="list-group">
+  <div class="contributors-grid">
     {% for contributor in all_bookers %}
-    <li class="list-group-item">
-      <img src="{{ contributor.booker_pic.url }}" alt="Contributor picture" class="contributor-pic">
-      <div>
-        <strong>{{ contributor.booker_name }}</strong>
-        <div class="text-muted small">{{ contributor.role }}</div>
+    <!-- Each contributor card becomes fully clickable -->
+    <article class="contributor-card" data-link="{% url 'booker_detail' contributor.pk %}"
+      aria-labelledby="contrib-{{ forloop.counter }}">
+      <img src="{{ contributor.booker_pic.url }}" alt="Picture of {{ contributor.booker_name }}"
+        class="contributor-pic">
+
+      <div class="contributor-info">
+        <div id="contrib-{{ forloop.counter }}" class="contributor-name">{{ contributor.booker_name }}</div>
+        <div class="contributor-role">{{ contributor.role }}</div>
       </div>
-      <a href="{% url 'booker_detail' contributor.pk %}" class="btn btn-primary btn-sm text-decoration-none">
-        View More
-      </a>
-    </li>
+
+      <div class="card-right">
+        <a href="{% url 'booker_detail' contributor.pk %}" class="btn btn-primary btn-sm" role="link"
+          aria-label="View more about {{ contributor.booker_name }}">
+          View More
+        </a>
+      </div>
+    </article>
     {% empty %}
-    <li class="list-group-item text-center text-muted">No contributors have been added yet.</li>
+    <div class="contributor-card" style="justify-content:center;">
+      <div class="contributor-info">
+        <div class="contributor-name">No contributors yet</div>
+        <div class="contributor-role">Add contributors to show here</div>
+      </div>
+    </div>
     {% endfor %}
-  </ul>
+  </div>
 </div>
+
+<script>
+  /*
+    JS:
+    - Makes the entire .contributor-card clickable (except when an internal link/button is explicitly clicked).
+    - Adds keyboard accessibility: Enter or Space activates the link.
+    - Touch-friendly: prevents double navigation on rapid taps.
+  */
+  (function () {
+    document.addEventListener('DOMContentLoaded', function () {
+      const cards = document.querySelectorAll('.contributor-card');
+
+      cards.forEach(card => {
+        const link = card.dataset.link;
+        if (!link) return;
+
+        let lastTap = 0;
+
+        // click handler (ignore clicks on real links/buttons inside)
+        card.addEventListener('click', function (e) {
+          const now = Date.now();
+          // ignore rapid double taps
+          if (now - lastTap < 300) return;
+          lastTap = now;
+
+          // If click target is a link/button (or inside one), let that handle navigation
+          if (e.target.closest('a') || e.target.closest('button')) return;
+
+          // otherwise navigate
+          window.location.href = link;
+        });
+
+        // keyboard activation
+        card.addEventListener('keydown', function (e) {
+          const key = e.key;
+          if (key === 'Enter' || key === ' ') {
+            e.preventDefault();
+            // If focus is on an inner link, let it handle; otherwise go to link
+            if (document.activeElement && (document.activeElement.tagName.toLowerCase() === 'a')) {
+              document.activeElement.click();
+              return;
+            }
+            window.location.href = link;
+          }
+        });
+
+        // allow pointer hover to add an attribute for styling if needed
+        card.addEventListener('pointerenter', () => card.setAttribute('data-hover', '1'));
+        card.addEventListener('pointerleave', () => card.removeAttribute('data-hover'));
+      });
+    });
+  })();
+</script>
+
 {% endblock %}

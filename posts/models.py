@@ -9,6 +9,7 @@ class BookDetails(models.Model):
     front_page_summary=models.CharField(max_length=250,null=True)
     detailed_summary=models.TextField(blank=True)
     book_picture=models.ImageField(null=True, upload_to='images/')
+    front_page_picture=models.ImageField(null=True,upload_to='images/front/')
     contributor=models.CharField(max_length=100,null=True)
     
     
