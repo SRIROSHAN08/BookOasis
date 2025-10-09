@@ -258,24 +258,23 @@
             <div class="book-meta" aria-hidden="false">
                 <div class="d-flex align-items-center">
                     <i class="bi bi-person" aria-hidden="true"></i>
-                    <span class="text-nowrap">{{ book.author_name|default:"Unknown Author" }}</span>
+                    <span class="text-nowrap">{{ book.author_name }}</span>
                 </div>
                 <div>
-                    <span class="badge-custom">Published: {{ book.published_date|default:"Unknown" }}</span>
+                    <span class="badge-custom">Published: {{ book.published_date }}</span>
                 </div>
             </div>
 
             <div class="summary" role="article" aria-label="Book summary">
                 <strong>Summary:</strong>&nbsp;
-                <span>{{ book.detailed_summary|default:"No summary available." }}</span>
+                <span>{{ book.detailed_summary }}</span>
             </div>
 
             <ul class="book-info" aria-hidden="false">
-                <li><i class="bi bi-bookmark-star"></i><b>Contributor:</b>&nbsp;<span>{{ book.contributor|default:"—"
-                        }}</span>
+                <li><i class="bi bi-bookmark-star"></i><b>Contributor:</b>&nbsp;<span>{{ book.contributor}}</span>
                 </li>
-                <li><i class="bi bi-calendar2-date"></i><b>Published:</b>&nbsp;<span>{{ book.published_date|default:"—"
-                        }}</span></li>
+                <li><i class="bi bi-calendar2-date"></i><b>Published:</b>&nbsp;<span>{{ book.published_date}}</span>
+                </li>
             </ul>
         </div>
 
