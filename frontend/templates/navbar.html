@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Book Oasis</title>
 
@@ -11,19 +11,20 @@
     {% load static %}
 
     <link rel="stylesheet" href="{% static 'css/user.css' %}" />
-    <!-- Elegant Font -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
+        /* ---------- Navbar base ---------- */
         .navbar-custom {
             position: relative;
-            z-index: 999;
+            /* keep it in normal flow */
+            z-index: 1030;
             height: 75px;
             padding: 0.5rem 1.2rem;
             background: linear-gradient(270deg, #ffffff, #ffd700, #fff3cd, #ffeaa7);
             background-size: 300% 300%;
             animation: goldenWave 8s ease infinite;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
         }
 
         @keyframes goldenWave {
@@ -47,32 +48,85 @@
             font-weight: 600;
             letter-spacing: 0.6px;
             text-shadow: 0 1px 6px rgba(255, 255, 255, 0.6);
-            transition: color 0.3s ease, transform 0.2s ease, text-shadow 0.3s ease;
+            transition: color .25s ease, transform .15s ease, text-shadow .25s ease;
         }
 
-        .navbar-custom .navbar-brand:hover,
         .navbar-custom .nav-link:hover,
         .navbar-custom .nav-link.active {
             color: #b8860b !important;
-            text-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
             transform: translateY(-2px);
         }
 
+        /* Toggler */
         .navbar-toggler {
-            border-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(59, 47, 47, 0.12);
+            padding: 6px;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.12);
         }
 
         .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg' %3e%3cpath stroke='rgba(59,47,47,0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22' /%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='%233b2f2f' stroke-width='2.2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
 
+        /* ---------- Mobile behaviour: keep collapse in flow ---------- */
+        @media (max-width: 991.98px) {
+
+            /* Let navbar grow in height (so the collapse pushes content down) */
+            .navbar-custom {
+                height: auto;
+                padding-bottom: 0.25rem;
+            }
+
+            /* Style the collapsed area like a panel but keep it in the flow (position: static) */
+            .navbar-custom .collapse.navbar-collapse {
+                position: static;
+                /* IMPORTANT: keep it in document flow */
+                background: linear-gradient(180deg, rgba(255, 250, 240, 0.98), rgba(255, 241, 167, 0.98));
+                padding: 0.7rem 1rem;
+                border-bottom-left-radius: 12px;
+                border-bottom-right-radius: 12px;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+                margin-top: 0.5rem;
+                /* small spacing so panel doesn't sit flush under brand */
+            }
+
+            .navbar-custom .navbar-nav {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+            }
+
+            .navbar-custom .nav-link {
+                padding: 0.6rem 0.8rem;
+                border-radius: 8px;
+                font-size: 1rem;
+            }
+
+            .navbar-custom .nav-link:hover,
+            .navbar-custom .nav-link.active {
+                color: #fff !important;
+                background: linear-gradient(90deg, rgba(184, 134, 11, 0.95), rgba(255, 189, 0, 0.95));
+                box-shadow: 0 6px 16px rgba(184, 134, 11, 0.14);
+            }
+        }
+
+        /* Very small screens */
         @media (max-width: 640px) {
+            .navbar-custom {
+                padding: 0.45rem 0.8rem;
+            }
+
             .navbar-custom .navbar-brand {
                 font-size: 1rem;
             }
 
             .navbar-custom .nav-link {
-                font-size: 0.95rem;
+                font-size: 0.98rem;
             }
         }
     </style>
@@ -106,7 +160,10 @@
         </div>
     </nav>
 
-    {% block content %}{% endblock %}
+    <!-- NO spacer-for-navbar here — removing it prevents extra gap -->
+
+    {% block content %}
+    {% endblock %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
