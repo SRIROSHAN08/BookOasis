@@ -10,7 +10,7 @@ DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 _allowed = os.environ.get("ALLOWED_HOSTS", "localhost 127.0.0.1").strip()
 ALLOWED_HOSTS = [h for token in (_allowed.replace(",", " ").split(" ")) for h in (token.split() if token else []) if h]
-
+api_key = os.environ.get('OPENWEATHER_API_KEY')
 
 
 

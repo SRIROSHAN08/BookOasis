@@ -148,6 +148,8 @@
                         href="/post/book/">Books</a>
                     <a class="nav-link {% if request.path == '/booker/all/' %}active{% endif %}"
                         href="/booker/all/">Contributors</a>
+                    <a class="nav-link {% if request.path == '/post/weather/' %}active{% endif %}"
+                        href="/post/weather/">Weather</a>
 
                     {% if user.is_authenticated %}
                     <a class="nav-link" href="/logout/">Logout</a>

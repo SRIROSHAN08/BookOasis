@@ -1,0 +1,11 @@
+{% extends navbar.html %}
+{% load static %}
+
+<h2>Weather in {{ weather.city }}</h2>
+{% if weather %}
+  <p>Temperature: {{ weather.temperature }} °C</p>
+  <p>Description: {{ weather.description }}</p>
+  <p>Humidity: {{ weather.humidity }}%</p>
+{% else %}
+  <p>Weather data not available.</p>
+{% endif %}
