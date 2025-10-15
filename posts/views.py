@@ -86,7 +86,7 @@ class WeatherView(TemplateView):
         
         lat = self.request.GET.get('lat')
         lon = self.request.GET.get('lon')
-        city = self.request.GET.get('city','Chennai')
+        city = self.request.GET.get('city','London')
         
         if lat and lon:
             url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric'

@@ -25,15 +25,12 @@
                         window.location.href = `/weather/?lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
                     },
                     function (error) {
-                        alert(
-                            "Location access denied or unavailable. Showing default weather data."
-                        );
-                        window.location.href = '/post/weather/';
+                        alert("Location access denied or unavailable. Showing default weather data.");
+                        window.location.href = '/weather/';
                     }
                 );
             } else {
-                // User clicks Cancel on confirm dialog
-                window.location.href = '/post/weather/';
+                window.location.href = '/weather/';
             }
         } else {
             alert("Geolocation is not supported by your browser. Showing default weather.");
