@@ -28,12 +28,12 @@
                         alert(
                             "Location access denied or unavailable. Showing default weather data."
                         );
-                        window.location.href = '/weather/';
+                        window.location.href = '/post/weather/';
                     }
                 );
             } else {
                 // User clicks Cancel on confirm dialog
-                window.location.href = '/weather/';
+                window.location.href = '/post/weather/';
             }
         } else {
             alert("Geolocation is not supported by your browser. Showing default weather.");
