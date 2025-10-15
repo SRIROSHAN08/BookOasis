@@ -1,12 +1,8 @@
-
-
 from pathlib import Path
 import dj_database_url
 import os
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-for-local")
@@ -76,10 +72,14 @@ DATABASES = {
     }
 }
 
-database_url=os.environ.get("DATABASE_URL")
-DATABASES["default"]=dj_database_url.parse(database_url)
-
-
+# If a DATABASE_URL env var exists, override default with Postgres config
+database_url = os.environ.get("DATABASE_URL")
+if database_url:
+    DATABASES["default"] = dj_database_url.parse(
+        database_url,
+        conn_max_age=600,   # keep DB connections open for performance
+        ssl_require=True    # enforce SSL; set False only if you know it's ok
+    )
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -108,6 +108,14 @@ USE_I18N = True
 USE_TZ = True
 
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
+
+
+
 
 
 
@@ -125,3 +133,5 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media') 
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

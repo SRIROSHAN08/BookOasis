@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Book Oasis — Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --p1: #ff7eb3;
+            --p2: #65d6ff;
+            --accent: #ffd166;
+            --card: rgba(255, 255, 255, 0.06);
+            --glass: rgba(255, 255, 255, 0.04);
+            --txt: rgba(255, 255, 255, 0.95);
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: radial-gradient(1200px 600px at 10% 20%, rgba(255, 126, 179, 0.12), transparent),
+                radial-gradient(1000px 500px at 90% 80%, rgba(101, 214, 255, 0.12), transparent),
+                linear-gradient(135deg, #0f172a 0%, #10233b 100%);
+            color: var(--txt);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow: auto;
+        }
+
+        /* floating shapes */
+        .shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(36px);
+            mix-blend-mode: screen;
+            opacity: 0.7;
+            z-index: -1
+        }
+
+        .s1 {
+            width: 420px;
+            height: 420px;
+            left: -120px;
+            top: -80px;
+            background: linear-gradient(135deg, var(--p1), var(--accent));
+            animation: drift 14s ease-in-out infinite
+        }
+
+        .s2 {
+            width: 360px;
+            height: 360px;
+            right: -140px;
+            bottom: -120px;
+            background: linear-gradient(135deg, var(--p2), #7c83ff);
+            animation: drift 11s ease-in-out infinite
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translateY(0) translateX(0)
+            }
+
+            50% {
+                transform: translateY(-24px) translateX(18px)
+            }
+
+            100% {
+                transform: translateY(0) translateX(0)
+            }
+        }
+
+        .container-wrap {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem
+        }
+
+        .card-register {
+            width: 100%;
+            max-width: 980px;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 18px 60px rgba(2, 6, 23, 0.6);
+            overflow: hidden;
+            transition: transform .35s ease
+        }
+
+        .card-register:hover {
+            transform: translateY(-6px)
+        }
+
+        .panel-left {
+            padding: 34px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            min-width: 320px
+        }
+
+        .panel-right {
+            padding: 34px 28px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.02))
+        }
+
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--p1), var(--p2));
+            display: grid;
+            place-items: center;
+            box-shadow: 0 10px 34px rgba(15, 23, 42, 0.6);
+        }
+
+        .logo i {
+            font-size: 28px;
+            color: #fff
+        }
+
+        h2 {
+            margin: 0;
+            font-weight: 800
+        }
+
+        .muted {
+            color: rgba(255, 255, 255, 0.8)
+        }
+
+        form .form-control {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            color: var(--txt);
+            border-radius: 10px;
+            padding: 10px 12px;
+            transition: all .2s ease
+        }
+
+        form .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.45)
+        }
+
+        form .form-control:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+            transform: translateY(-2px)
+        }
+
+        .btn-primary-custom {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 0;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--p1), var(--p2));
+            color: #081222;
+            box-shadow: 0 12px 40px rgba(101, 214, 255, 0.08);
+            text-transform: uppercase
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--txt);
+            border-radius: 10px
+        }
+
+        .note {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85)
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+            margin: 1rem 0;
+            border-radius: 2px
+        }
+
+        .pw-meter {
+            height: 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            overflow: hidden
+        }
+
+        .pw-meter>i {
+            display: block;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff7eb3, #65d6ff);
+            transition: width .45s ease
+        }
+
+        .pw-hint {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 6px
+        }
+
+        .small-link {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 700;
+            text-decoration: none
+        }
+
+        @media (min-width:992px) {
+            .card-inner {
+                display: grid;
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media (max-width:991px) {
+            .panel-left {
+                display: none
+            }
+
+            .card-register {
+                border-radius: 14px
+            }
+        }
+
+        .error-text {
+            color: #ffb4b4;
+            font-weight: 700;
+            margin-top: .6rem
+        }
+    </style>
+</head>
+
+<body>
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+
+    <div class="container container-wrap">
+        <div class="card-register">
+            <div class="card-inner">
+                <div class="panel-left">
+                    <div class="brand">
+                        <div class="logo"><i class="fas fa-book-open"></i></div>
+                        <div>
+                            <h2>Book Oasis</h2>
+                            <p class="muted">Join our small, curious community of readers.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p style="margin:0;font-weight:700">Why join?</p>
+                        <ul style="margin-top:8px;color:rgba(255,255,255,0.85);padding-left:18px">
+                            <li>Save favorites & build shelves</li>
+                            <li>Get personalized recommendations</li>
+                            <li>Follow authors and join discussions</li>
+                        </ul>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <p class="muted" style="margin:0">Already registered? <a href="/login/" class="small-link">Sign
+                            in</a></p>
+                </div>
+
+                <div class="panel-right">
+                    <div class="card-body p-0">
+                        <form action="" method="POST" id="registerForm">
+                            {% csrf_token %}
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Username</label>
+                                    <input type="text" name="username" class="form-control"
+                                        placeholder="Choose a username" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">First name</label>
+                                    <input type="text" name="first_name" class="form-control" placeholder="First name"
+                                        required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Last name</label>
+                                    <input type="text" name="last_name" class="form-control" placeholder="Last name"
+                                        required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Age</label>
+                                    <input type="number" name="age" class="form-control" placeholder="Your age" min="12"
+                                        max="120" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" name="email" class="form-control" placeholder="you@domain.com"
+                                        required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Password</label>
+                                    <div style="position:relative">
+                                        <input type="password" name="password" id="password" class="form-control"
+                                            placeholder="Create a strong password" required>
+                                        <button type="button" id="togglePw"
+                                            class="btn btn-sm btn-outline position-absolute"
+                                            style="right:8px;top:8px">Show</button>
+                                    </div>
+                                    <div class="pw-meter mt-2"><i id="pwMeter"></i></div>
+                                    <div class="pw-hint" id="pwHint">Use at least 8 characters — mix letters & numbers.
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Confirm password</label>
+                                    <input type="password" name="confirm_password" id="confirm_password"
+                                        class="form-control" placeholder="Repeat password" required>
+                                </div>
+                            </div>
+
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-primary-custom">Create account</button>
+                            </div>
+
+                            {% if error %}
+                            <p class="error-text">{{ error }}</p>
+                            {% endif %}
+
+                            <div class="divider"></div>
+                            <p class="muted text-center mt-3">© 2025 Book Oasis Community</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% bootstrap_javascript %}
+    <script>
+        // Password visibility toggle
+        const pw = document.getElementById('password');
+        const toggle = document.getElementById('togglePw');
+        const pwMeter = document.getElementById('pwMeter');
+        const pwHint = document.getElementById('pwHint');
+
+        toggle.addEventListener('click', () => {
+            if (pw.type === 'password') { pw.type = 'text'; toggle.textContent = 'Hide' } else { pw.type = 'password'; toggle.textContent = 'Show' }
+        });
+
+        // Simple password strength
+        function strength(s) {
+            let score = 0;
+            if (s.length >= 8) score += 25;
+            if (/[A-Z]/.test(s)) score += 20;
+            if (/[0-9]/.test(s)) score += 20;
+            if (/[^A-Za-z0-9]/.test(s)) score += 20;
+            if (s.length >= 12) score += 15;
+            return Math.min(score, 100);
+        }
+        pw.addEventListener('input', () => {
+            const val = pw.value;
+            const sc = strength(val);
+            pwMeter.style.width = sc + '%';
+            if (sc < 35) { pwHint.textContent = 'Weak — try adding uppercase, numbers, or symbols.' }
+            else if (sc < 70) { pwHint.textContent = 'Fair — add more length or special characters.' }
+            else { pwHint.textContent = 'Strong password — nice!'; }
+        });
+
+        // Client-side confirm match check
+        const form = document.getElementById('registerForm');
+        form.addEventListener('submit', (e) => {
+            const c = document.getElementById('confirm_password').value;
+            if (pw.value !== c) { e.preventDefault(); alert('Passwords do not match.'); }
+        });
+    </script>
+</body>
+
+</html>
