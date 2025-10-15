@@ -1,14 +1,45 @@
 {% extends 'navbar.html' %}
 {% load static %}
 
-{% block content %}
-<h2>Weather in {{ weather.city }}</h2>
-{% if weather %}
-  <p>Temperature: {{ weather.temperature }} °C</p>
-  <p>Description: {{ weather.description }}</p>
-  <p>Humidity: {{ weather.humidity }}%</p>
-{% else %}
-  <p>Weather data not available.</p>
-{% endif %}
+<h2>Weather Information</h2>
+
+<button id="getWeatherBtn">Get Weather For My Location</button>
+
+<div id="weather-data">
+    {% if weather %}
+    <h3>Weather in {{ weather.city }}</h3>
+    <p>Temperature: {{ weather.temperature }} °C</p>
+    <p>Description: {{ weather.description }}</p>
+    <p>Humidity: {{ weather.humidity }}%</p>
+    {% else %}
+    <p>Weather data not available.</p>
+    {% endif %}
+</div>
+
+<script>
+    document.getElementById('getWeatherBtn').addEventListener('click', function () {
+        if (navigator.geolocation) {
+            if (confirm("This site wants to access your location to show local weather.\nClick 'OK' to allow, or 'Cancel' for default weather.")) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        window.location.href = `/weather/?lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
+                    },
+                    function (error) {
+                        alert(
+                            "Location access denied or unavailable. Showing default weather data."
+                        );
+                        window.location.href = '/weather/';
+                    }
+                );
+            } else {
+                // User clicks Cancel on confirm dialog
+                window.location.href = '/weather/';
+            }
+        } else {
+            alert("Geolocation is not supported by your browser. Showing default weather.");
+            window.location.href = '/weather/';
+        }
+    });
+</script>
 
 {% endblock %}

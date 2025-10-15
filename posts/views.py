@@ -83,14 +83,24 @@ class WeatherView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         api_key = settings.api_key
+        
+        lat = self.request.GET.get('lat')
+        lon = self.request.GET.get('lon')
         city = self.request.GET.get('city','Chennai')
-        url =  f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric'
+        
+        if lat and lon:
+            url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric'
+        
+        else:
+            url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric'
+            
+            
         response = requests.get(url)
         data = response.json()
         
         if response.status_code == 200 :
             weather = {
-                'city' :city,
+                'city' :data.get('name',city),
                 'temperature' : data['main']['temp'],
                 'description' : data['weather'][0]['description'],
                 'humidity' : data['main']['humidity'],
